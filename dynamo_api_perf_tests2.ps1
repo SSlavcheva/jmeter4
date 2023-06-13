@@ -1,7 +1,13 @@
+$BuildNumber = "%build.number%"
+$JMeterLogFile = "%jmeter_logfile%"
 
-$BuildNumber = "12345"
+# Replace the placeholder with the build number in the JMeter log file name
+$JMeterLogFile = $JMeterLogFile -replace "%build.number%", $BuildNumber
 
-& "C:\Users\s.slavcheva\Desktop\Demo\jmeterProjectDynamo\apache-jmeter-5.5\bin\jmeter.bat" -n -t "C:\Users\s.slavcheva\Desktop\Demo\jmeterProjectDynamo\apache-jmeter-5.5\bin\Perf_API.jmx" -l "%jmeter_logfile%"
+# Execute the JMeter command with the updated log file name
+& "C:\Users\s.slavcheva\Desktop\Demo\jmeterProjectDynamo\apache-jmeter-5.5\bin\jmeter.bat" -n -t "C:\Users\s.slavcheva\Desktop\Demo\jmeterProjectDynamo\apache-jmeter-5.5\bin\Perf_API.jmx" -l $JMeterLogFile
+
+# & "C:\Users\s.slavcheva\Desktop\Demo\jmeterProjectDynamo\apache-jmeter-5.5\bin\jmeter.bat" -n -t "C:\Users\s.slavcheva\Desktop\Demo\jmeterProjectDynamo\apache-jmeter-5.5\bin\Perf_API.jmx" -l "%jmeter_logfile%"
 
 Start-Sleep -Seconds 300
 Copy-Item -Path "C:\BuildAgent\work\39fc5dc3e607d09c\Logs.jtl" -Destination "\\SF-SSLAVCHEVA\share\Logs23.jtl"
