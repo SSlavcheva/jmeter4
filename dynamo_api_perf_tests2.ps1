@@ -1,7 +1,7 @@
 
 $BuildNumber = "12345"
 
-& "C:\Users\s.slavcheva\Desktop\Demo\jmeterProjectDynamo\apache-jmeter-5.5\bin\jmeter.bat" -n -t "C:\Users\s.slavcheva\Desktop\Demo\jmeterProjectDynamo\apache-jmeter-5.5\bin\Perf_API.jmx" -l %jmeter_logfile%
+& "C:\Users\s.slavcheva\Desktop\Demo\jmeterProjectDynamo\apache-jmeter-5.5\bin\jmeter.bat" -n -t "C:\Users\s.slavcheva\Desktop\Demo\jmeterProjectDynamo\apache-jmeter-5.5\bin\Perf_API.jmx" -l "%jmeter_logfile%"
 
 Start-Sleep -Seconds 300
 Copy-Item -Path "C:\BuildAgent\work\39fc5dc3e607d09c\Logs.jtl" -Destination "\\SF-SSLAVCHEVA\share\Logs23.jtl"
