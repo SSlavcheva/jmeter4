@@ -5,6 +5,32 @@
 
 Write-Output "##teamcity[blockOpened name='script is run']"
 
+Write-Host "Insert records in DB"
+$DatabaseServer = "DYNAMOSQL3\SQL2019"
+$DatabaseSchema = "testresults" 
+$DatabaseUser = "profiler"
+$DatabasePass = "profiler"
+
+$SqlConnection = New-Object System.Data.SqlClient.SqlConnection
+$SqlConnection.ConnectionString = "Data Source=$DatabaseServer;Initial Catalog=$DatabaseSchema;User Id=$DatabaseUser;Password=$DatabasePass" 
+$SqlCmd = New-Object System.Data.SqlClient.SqlCommand
+#$SqlCmd.CommandText = "BULK INSERT testresults.dbo.PerformanceAPISummaryReport FROM '\\sf-fs-01.netagesolutions.com\Sofia\Products\QA\PerformanceTesting\JmeterResults\Result.csv' WITH (FIELDTERMINATOR = ',', ROWTERMINATOR = '\n',FIRSTROW = 2);"
+
+$SqlCmd.CommandText = @"
+BULK INSERT testresults.dbo.PerformanceAPISummaryReport 
+FROM 'C:\BuildAgent\work\39fc5dc3e607d09c\Logs.jtl'
+WITH (FIELDTERMINATOR = ',', ROWTERMINATOR = '\n', FIRSTROW = 2);
+"@
+
+
+$SqlCmd.Connection = $SqlConnection 
+$SqlConnection.Open()
+$SqlCmd.ExecuteNonQuery()
+$SqlConnection.Close()
+
+Write-Host "Done"
+
+
 
 
 
