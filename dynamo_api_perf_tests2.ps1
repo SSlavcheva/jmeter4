@@ -1,7 +1,8 @@
 
 & "C:\Users\s.slavcheva\Desktop\Demo\jmeterProjectDynamo\apache-jmeter-5.5\bin\jmeter.bat" -n -t "C:\Users\s.slavcheva\Desktop\Demo\jmeterProjectDynamo\apache-jmeter-5.5\bin\Perf_API.jmx" -l "C:\BuildAgent\work\39fc5dc3e607d09c\Logs.jtl"
 
-
+Start-Sleep -Seconds 300
+Copy-Item -Path "C:\BuildAgent\work\39fc5dc3e607d09c\Logs.jtl" -Destination "\\SF-SSLAVCHEVA\share\Logs23.jtl"
 
 Write-Output "##teamcity[blockOpened name='script is run']"
 
@@ -16,7 +17,7 @@ $SqlConnection.ConnectionString = "Data Source=$DatabaseServer;Initial Catalog=$
 $SqlCmd = New-Object System.Data.SqlClient.SqlCommand
 #$SqlCmd.CommandText = "BULK INSERT testresults.dbo.PerformanceAPISummaryReport FROM '\\sf-fs-01.netagesolutions.com\Sofia\Products\QA\PerformanceTesting\JmeterResults\Result.csv' WITH (FIELDTERMINATOR = ',', ROWTERMINATOR = '\n',FIRSTROW = 2);"
 
-Copy-Item -Path "C:\BuildAgent\work\39fc5dc3e607d09c\Logs.jtl" -Destination "\\SF-SSLAVCHEVA\share\Logs23.jtl"
+#Copy-Item -Path "C:\BuildAgent\work\39fc5dc3e607d09c\Logs.jtl" -Destination "\\SF-SSLAVCHEVA\share\Logs23.jtl"
 
 $SqlCmd.CommandText = @"
 BULK INSERT testresults.dbo.PerformanceAPISummaryReport 
